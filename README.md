@@ -1,2 +1,2 @@
-# srephcom-ai
+# stephcom-ai
 Structure
