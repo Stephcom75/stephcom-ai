@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="cyber">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STEPHCOM — Studio Engine V2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=Exo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --void:#020509; --deep:#071424; --panel:rgba(10,24,44,.78); --panel2:rgba(7,18,34,.92);
+      --cyan:#00e5ff; --cyan2:#3afcff; --green:#41ff9b; --gold:#f5d56b; --violet:#7c3aed;
+      --red:#ff4d6d; --text:#eafcff; --muted:#93b9c6; --line:rgba(0,229,255,.25);
+      --soft:rgba(0,229,255,.10); --shadow:0 0 48px rgba(0,229,255,.16);
+      --radius:22px;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0; color:var(--text); background:
+      radial-gradient(circle at 15% 12%, rgba(0,229,255,.20), transparent 32%),
+      radial-gradient(circle at 75% 0%, rgba(124,58,237,.22), transparent 28%),
+      linear-gradient(135deg, #06121f 0%, #071727 45%, #020509 100%);
+      font-family:'Exo 2',system-ui,sans-serif; min-height:100vh; overflow-x:hidden;}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.75),transparent 90%)}
+    .wrap{width:min(1420px,calc(100% - 32px));margin:auto;padding:28px 0 46px;position:relative;z-index:1}.topbar{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px 20px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(4,14,28,.78);box-shadow:var(--shadow);backdrop-filter:blur(16px)}
+    .brand{display:flex;gap:16px;align-items:center}.logo{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,var(--cyan),var(--green));color:#03121a;display:grid;place-items:center;font-family:'Orbitron';font-weight:900;box-shadow:0 0 26px rgba(0,229,255,.55)}
+    h1{margin:0;font-family:'Orbitron';letter-spacing:.08em;font-size:clamp(1.8rem,4vw,3.4rem);line-height:1}.tagline{margin:8px 0 0;color:var(--text);font-weight:700}.pillbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.pill{border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-family:'Share Tech Mono';text-transform:uppercase;color:var(--cyan2);background:rgba(0,229,255,.08)}
+    .hero{display:grid;grid-template-columns:1.55fr .75fr;gap:18px;margin-top:20px}.card{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,rgba(10,28,52,.84),rgba(5,16,30,.90));box-shadow:var(--shadow);overflow:hidden}.hero-main{padding:42px}.eyebrow{font-family:'Share Tech Mono';color:var(--cyan2);letter-spacing:.18em;text-transform:uppercase;font-size:1rem}.headline{font-family:'Orbitron';font-size:clamp(2.5rem,7vw,6.3rem);line-height:.94;margin:24px 0}.headline span{display:block;color:var(--green);text-shadow:0 0 26px rgba(65,255,155,.35)}.lead{font-size:1.25rem;line-height:1.45;font-weight:700;max-width:980px}.quick{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{cursor:pointer;border:1px solid rgba(0,229,255,.35);border-radius:14px;padding:13px 18px;color:var(--text);font-weight:900;background:linear-gradient(135deg,rgba(0,229,255,.20),rgba(124,58,237,.16));transition:.18s;font-family:'Exo 2';box-shadow:0 0 18px rgba(0,229,255,.12)}.btn:hover{transform:translateY(-2px);border-color:var(--cyan);box-shadow:0 0 24px rgba(0,229,255,.34)}.btn.primary{background:linear-gradient(135deg,var(--cyan),var(--green));color:#03121a}.btn.warn{border-color:rgba(255,77,109,.55);background:rgba(255,77,109,.12)}
+    .metrics{padding:28px;display:grid;gap:14px}.metric{border:1px solid var(--line);border-radius:18px;padding:20px;background:rgba(0,229,255,.07)}.metric strong{font-family:'Orbitron';font-size:2rem;color:var(--cyan2)}.note{border-color:rgba(245,213,107,.35);background:rgba(245,213,107,.08);color:#fff1bb;font-weight:700}
+    .workspace{display:grid;grid-template-columns:360px 1fr;gap:18px;margin-top:18px}.side{padding:16px}.side h2,.studio h2{font-family:'Orbitron';margin:4px 0 16px}.engine-list{display:grid;gap:10px}.engine{border:1px solid var(--line);border-radius:16px;padding:15px;cursor:pointer;background:rgba(255,255,255,.04);transition:.15s}.engine:hover,.engine.active{border-color:var(--cyan);background:rgba(0,229,255,.14);box-shadow:inset 0 0 18px rgba(0,229,255,.08)}.engine strong{display:block}.engine small{color:var(--muted);font-weight:700;line-height:1.3}
+    .studio{padding:22px}.status{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}.status .selected{border:1px solid var(--cyan);background:rgba(0,229,255,.14);color:var(--cyan2);border-radius:999px;padding:9px 13px;font-family:'Share Tech Mono';text-transform:uppercase}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}label{font-weight:900;color:#d7faff}input,textarea,select{width:100%;border:1px solid var(--line);border-radius:14px;background:rgba(2,7,14,.62);color:var(--text);padding:13px 14px;font:700 1rem 'Exo 2';outline:none}textarea{min-height:132px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,.08)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.output{margin-top:18px;border:1px solid var(--line);border-radius:18px;background:rgba(2,9,18,.66);overflow:hidden}.output-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);background:rgba(0,229,255,.08)}.output-head h3{margin:0;font-family:'Share Tech Mono';letter-spacing:.14em;color:var(--cyan2);text-transform:uppercase}.outmode{font-family:'Share Tech Mono';border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:var(--green)}pre{margin:0;padding:22px;white-space:pre-wrap;font:1rem/1.55 'Share Tech Mono',monospace;min-height:300px;color:#f4feff}.footer{color:var(--muted);text-align:center;margin-top:22px;font-weight:700}.blink{animation:pulse 1.2s infinite}@keyframes pulse{50%{opacity:.45}}
+    @media(max-width:980px){.hero,.workspace{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.hero-main{padding:28px}.pillbar{justify-content:flex-start}.topbar{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="topbar">
+      <div class="brand"><div class="logo">S</div><div><h1>STEPHCOM</h1><p class="tagline">Studio Engine — de l'idée brute au livrable professionnel.</p></div></div>
+      <div class="pillbar"><span class="pill">V2 Frontend</span><span class="pill">API à brancher</span><span class="pill">Mémoire locale</span><span class="pill">Self Improve</span></div>
+    </header>
+
+    <section class="hero">
+      <div class="card hero-main">
+        <div class="eyebrow">Stephcom Studio Engine</div>
+        <div class="headline">Un seul cockpit pour <span>créer, corriger, lancer.</span></div>
+        <p class="lead">Sites web, landing pages, articles SEO, fiches produits, directions artistiques, artistes IA, voix, clips, campagnes Instagram, TikTok, YouTube Shorts et X. Cette V2 rend les modes visibles, génère des dossiers complets et prépare la connexion API sécurisée.</p>
+        <div class="quick">
+          <button class="btn primary" data-quick="Projet complet">Créer un projet complet</button>
+          <button class="btn" data-quick="Artiste IA">Créer un artiste IA</button>
+          <button class="btn" data-quick="Campagne réseaux sociaux">Créer une campagne</button>
+          <button class="btn" data-quick="Self Improve">Auto-améliorer</button>
+        </div>
+      </div>
+      <aside class="card metrics">
+        <div class="metric"><strong>12</strong><br>modes créatifs structurés</div>
+        <div class="metric"><strong>100%</strong><br>contrôle humain avant fichiers importants</div>
+        <div class="metric note">Règle centrale : aucune clé API dans le frontend. La vraie IA sera branchée via backend sécurisé.</div>
+      </aside>
+    </section>
+
+    <section class="workspace">
+      <aside class="card side">
+        <h2>Engines</h2>
+        <div class="engine-list" id="engineList"></div>
+      </aside>
+
+      <section class="card studio">
+        <div class="status"><span>Mode actif :</span><span class="selected" id="activeMode">Projet complet</span><span class="selected" id="hintMode">prêt</span></div>
+        <h2>Studio Engine</h2>
+        <div class="grid">
+          <div class="field"><label>Nom du projet</label><input id="projectName" placeholder="Ex : Artiste IA, PHOTOBLOC, salle de sport..." /></div>
+          <div class="field"><label>Niveau de sortie</label><select id="outputLevel"><option>Tout générer</option><option>Stratégie seulement</option><option>Textes complets</option><option>Code complet</option><option>Prompts IA seulement</option><option>Dossier client</option></select></div>
+          <div class="field"><label>Cible</label><input id="target" placeholder="Ex : clients premium, artistes, e-commerce, salles de sport..." /></div>
+          <div class="field"><label>Style souhaité</label><input id="styleWanted" placeholder="Ex : cyber premium, luxe discret, éditorial, minimal..." /></div>
+          <div class="field full"><label>Demande brute</label><textarea id="brief" placeholder="Écris ton idée comme tu la dirais naturellement. Stephcom va la structurer en livrables professionnels."></textarea></div>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="btnDossier">Générer le dossier complet</button>
+          <button class="btn" id="btnPrompt">Prompt maître</button>
+          <button class="btn" id="btnPlan">Plan de livrables</button>
+          <button class="btn" id="btnImprove">Auto-corriger / V2</button>
+          <button class="btn" id="btnCopy">Copier la sortie</button>
+          <button class="btn warn" id="btnClear">Effacer</button>
+        </div>
+        <div class="output">
+          <div class="output-head"><h3>Sortie Stephcom</h3><span class="outmode" id="outMode">Projet complet</span></div>
+          <pre id="output">Sélectionne un engine, remplis les champs, puis clique sur “Générer le dossier complet”.</pre>
+        </div>
+      </section>
+    </section>
+    <p class="footer">STEPHCOM V2 — Prototype frontend. Prochaine étape : backend sécurisé + API + mémoire projet.</p>
+  </main>
+
+<script>
+const engines = [
+  {name:'Projet complet', desc:'Transforme une idée brute en stratégie, DA, contenus, code et campagne.', agents:['Stratégie','Directeur Artistique','Copywriter','Développeur','Campaign Engine','Self Improve'], template:'Je veux créer un projet complet avec une stratégie, une direction artistique, les contenus, le code ou les prompts nécessaires, puis une campagne de lancement.'},
+  {name:'Site web / landing page', desc:'Structure, textes, UI, HTML/CSS/JS ou React, mobile et CTA.', agents:['Stratégie','UX/UI','Copywriter','Développeur','Self Improve'], template:'Je veux créer un site web ou une landing page professionnelle, responsive, avec une forte direction artistique, des textes vendeurs et un code propre.'},
+  {name:'Article SEO', desc:'Article, titres, méta, FAQ, mots-clés et angle éditorial.', agents:['SEO','Copywriter','Analyse','Self Improve'], template:'Je veux créer un article SEO à partir d’une idée, d’un site ou d’un contenu existant, avec titres, méta-description, FAQ et mots-clés.'},
+  {name:'Analyse site existant', desc:'Audit, forces, faiblesses, repositionnement, SEO et redesign.', agents:['Analyse de Site','Stratégie','SEO','Design'], template:'Je veux analyser un site existant, identifier ses forces et faiblesses, puis proposer une version améliorée plus professionnelle et plus vendeuse.'},
+  {name:'Fiche produit', desc:'Nom, description premium, arguments, SEO, Shopify.', agents:['Copywriter','SEO','Product Engine','Self Improve'], template:'Je veux créer une fiche produit premium, claire, émotionnelle et optimisée pour Shopify ou e-commerce.'},
+  {name:'Direction artistique', desc:'Univers, couleurs, typographies, moodboard, prompts images.', agents:['Directeur Artistique','Prompt Image','Branding'], template:'Je veux créer une direction artistique complète : univers, couleurs, typographies, ambiance, références et prompts visuels.'},
+  {name:'Code complet', desc:'Fichiers complets à remplacer, pas de fragments isolés.', agents:['Développeur','Audit Code','Self Improve'], template:'Je veux générer ou corriger du code complet, avec des fichiers entiers à remplacer et une explication simple des modifications.'},
+  {name:'Artiste IA', desc:'Nom, bio, look, voix originale, single, pochette, clip et site.', agents:['Artist Engine','Directeur Artistique','Voix/Audio','Copywriter','Campaign Engine'], template:'Je veux créer un artiste IA original avec nom, identité visuelle, voix originale, premier single, pochette, clip, site web et campagne de lancement.'},
+  {name:'Voix / musique', desc:'Voix originale, direction vocale, paroles, prompt Suno/Udio.', agents:['Voix/Audio','Copywriter','Artist Engine'], template:'Je veux définir une voix originale et une direction musicale complète, sans imiter un artiste réel, avec paroles et prompts pour outils musicaux.'},
+  {name:'Clip IA', desc:'Concept vidéo, storyboard, prompts plans, montage court.', agents:['Réalisateur','Prompt Vidéo','Directeur Artistique'], template:'Je veux créer un concept de clip IA avec storyboard, plans, prompts vidéo, ambiance et découpage prêt à produire.'},
+  {name:'Campagne réseaux sociaux', desc:'Instagram, TikTok, YouTube Shorts, X, planning et hooks.', agents:['Campaign Engine','Copywriter','Stratégie','Prompt Image/Vidéo'], template:'Je veux créer une campagne complète Instagram, TikTok, YouTube Shorts et X, avec posts, reels, stories, threads, hashtags, hooks et calendrier.'},
+  {name:'Self Improve', desc:'Audit, correction, V2 premium, risques et checklist.', agents:['Self Improve','Audit Texte','Audit Code','Contrôle Qualité'], template:'Je veux auditer et améliorer une production existante : clarté, impact, structure, design, code, SEO et risques.'}
+];
+let active = engines[0];
+const $ = id => document.getElementById(id);
+function renderEngines(){ $('engineList').innerHTML = engines.map((e,i)=>`<div class="engine ${i===0?'active':''}" data-i="${i}"><strong>${e.name}</strong><small>${e.desc}</small></div>`).join(''); document.querySelectorAll('.engine').forEach(el=>el.addEventListener('click',()=>setMode(+el.dataset.i,true)));}
+function setMode(i,fill=false){ active=engines[i]; document.querySelectorAll('.engine').forEach((el,idx)=>el.classList.toggle('active',idx===i)); $('activeMode').textContent=active.name; $('outMode').textContent=active.name; $('hintMode').textContent='mode sélectionné'; if(fill && !$('brief').value.trim()) $('brief').value=active.template; if(fill && !$('projectName').value.trim()) $('projectName').value=active.name; pulseHint();}
+function pulseHint(){ $('hintMode').classList.add('blink'); setTimeout(()=>$('hintMode').classList.remove('blink'),1100);}
+function data(){ return {project:$('projectName').value.trim()||'Projet sans nom',target:$('target').value.trim()||'Cible à préciser',style:$('styleWanted').value.trim()||'Style à préciser',brief:$('brief').value.trim()||active.template,level:$('outputLevel').value};}
+function promptMaster(){ const d=data(); return `PROMPT MAÎTRE — STEPHCOM STUDIO ENGINE\n\nRÔLE\nTu es Stephcom Studio Engine, un module IA maître ultra-professionnel. Tu transformes une idée brute en livrables professionnels complets.\n\nMODE ACTIF\n${active.name}\n\nAGENTS À ACTIVER\n${active.agents.map(a=>'• Agent '+a).join('\n')}\n\nPROJET\nNom : ${d.project}\nCible : ${d.target}\nStyle souhaité : ${d.style}\nNiveau de sortie : ${d.level}\n\nDEMANDE UTILISATEUR\n${d.brief}\n\nRÈGLES DE PRODUCTION\n1. Produire une réponse structurée, professionnelle et directement exploitable.\n2. Ne jamais inventer de faits non fournis ; signaler les points à vérifier.\n3. Pour un artiste IA ou une voix : créer une identité originale, sans imitation exacte d’un artiste réel.\n4. Pour du code : fournir des fichiers complets à remplacer, jamais des fragments isolés.\n5. Pour les campagnes : inclure Instagram, TikTok, YouTube Shorts et X lorsque pertinent.\n6. Pour toute modification importante : proposer une V2, mais demander validation avant remplacement.\n\nFORMAT ATTENDU\n1. Analyse du besoin\n2. Positionnement\n3. Concept créatif\n4. Direction artistique\n5. Contenus à produire\n6. Prompts image / vidéo / audio si utiles\n7. Site web ou code si utile\n8. Campagne réseaux sociaux\n9. Auto-critique / améliorations V2\n10. Checklist d’exécution`;}
+function planLivrables(){ const d=data(); return `PLAN DE LIVRABLES — ${d.project.toUpperCase()}\n\n1. STRATÉGIE\n• Objectif principal\n• Cible : ${d.target}\n• Promesse claire\n• Angle différenciant\n• Message prioritaire\n\n2. DIRECTION ARTISTIQUE\n• Style : ${d.style}\n• Palette couleur\n• Typographies\n• Ambiance visuelle\n• Références générales\n• Prompts images\n\n3. CONTENUS\n• Slogans\n• Texte de présentation\n• Bio / storytelling\n• Articles ou fiches produits si nécessaires\n• FAQ et CTA\n\n4. PRODUCTION WEB\n• Arborescence\n• Sections de page\n• Version mobile\n• CTA\n• Code complet à remplacer si demandé\n\n5. ARTISTE / VOIX / AUDIO, SI PERTINENT\n• Nom d’artiste original\n• Univers musical\n• Voix originale\n• Paroles / single\n• Pochette\n• Prompt Suno / Udio\n\n6. CAMPAGNE RÉSEAUX SOCIAUX\n• Instagram : posts, carrousels, stories, reels\n• TikTok : scripts courts, hooks, formats\n• YouTube Shorts : adaptation verticale\n• X : posts courts, threads, lancement\n• Calendrier éditorial\n\n7. SELF IMPROVE\n• Audit qualité\n• Note provisoire\n• Risques\n• V2 recommandée\n• Checklist avant publication`;}
+function improve(){ return `SELF IMPROVE ENGINE — AUDIT & V2\n\nDIAGNOSTIC\n• Clarté : clarifier la promesse finale du projet.\n• Structure : séparer chaque livrable en blocs distincts.\n• Impact commercial : renforcer les bénéfices, CTA et angles de conversion.\n• Direction artistique : préciser couleurs, typographies, images et ambiance.\n• Campagne : inclure systématiquement Instagram, TikTok, YouTube Shorts et X.\n• Code : fournir uniquement des fichiers complets à remplacer.\n• Sécurité : ne jamais exposer de clé API dans le frontend.\n\nNOTE PROVISOIRE\nQualité globale : 8 / 10\nPotentiel : 9.5 / 10\nRisque : moyen si API ou fichiers sont modifiés sans validation.\n\nV2 RECOMMANDÉE\n1. Reformuler la demande en promesse claire.\n2. Générer les livrables par blocs.\n3. Ajouter une version plus premium et plus commerciale.\n4. Ajouter une checklist d’exécution.\n5. Demander validation avant remplacement de fichier.`;}
+function dossier(){ return `${promptMaster()}\n\n\n==============================\n${planLivrables()}\n\n\n==============================\n${improve()}\n\n\nPROCHAINE ACTION RECOMMANDÉE\nValider ce cadrage, puis demander à Stephcom de générer le premier livrable complet du projet.`;}
+function setOut(txt){ $('output').textContent=txt; try{localStorage.setItem('stephcom_last_output',txt)}catch(e){} }
+$('btnPrompt').onclick=()=>setOut(promptMaster()); $('btnPlan').onclick=()=>setOut(planLivrables()); $('btnImprove').onclick=()=>setOut(improve()); $('btnDossier').onclick=()=>setOut(dossier()); $('btnClear').onclick=()=>setOut('Sortie effacée.');
+$('btnCopy').onclick=async()=>{try{await navigator.clipboard.writeText($('output').textContent); $('hintMode').textContent='sortie copiée'; pulseHint();}catch(e){$('hintMode').textContent='copie impossible';}}
+document.querySelectorAll('[data-quick]').forEach(btn=>btn.addEventListener('click',()=>{const idx=engines.findIndex(e=>e.name===btn.dataset.quick); if(idx>=0) setMode(idx,true); window.scrollTo({top:document.querySelector('.workspace').offsetTop-12,behavior:'smooth'});}));
+renderEngines(); const last=localStorage.getItem('stephcom_last_output'); if(last) $('output').textContent=last;
+</script>
+</body>
+</html>
